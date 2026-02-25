@@ -1,10 +1,11 @@
-name: Build
+name: Build APK
 on: [push, workflow_dispatch]
 jobs:
-  android:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout do Código
+        uses: actions/checkout@v4
 
       - name: Buildozer Action
         uses: ArtemSerebrennkov/buildozer-action@v1
@@ -12,9 +13,8 @@ jobs:
           command: android debug
           buildozer_version: master
 
-      - name: Upload APK
+      - name: Upload do APK
         uses: actions/upload-artifact@v4
         with:
-          name: APK-Gerado
+          name: APK-Final
           path: bin/*.apk
-          
